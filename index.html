@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <title>自己紹介サイトプロフィール</title>
+  <style>
+    .fade {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .fade.show {
+      opacity: 1;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100 font-sans text-gray-600">
@@ -24,9 +34,14 @@
     </div>
   </header>
 
-  <!-- ヒーローイメージ -->
-  <div class="w-full">
-    <img class="w-full h-96" src="https://picsum.photos/1920/1080" alt="Full Width Image" />
+  <!-- ヒーローイメージスライドショー -->
+  <div class="w-full relative h-96 overflow-hidden">
+    <img id="slide1" class="w-full h-full object-cover fade show absolute top-0 left-0"
+      src="https://picsum.photos/1920/1080?1" alt="Slide 1" />
+    <img id="slide2" class="w-full h-full object-cover fade absolute top-0 left-0"
+      src="https://picsum.photos/1920/1080?2" alt="Slide 2" />
+    <img id="slide3" class="w-full h-full object-cover fade absolute top-0 left-0"
+      src="https://picsum.photos/1920/1080?3" alt="Slide 3" />
   </div>
 
   <!-- メインコンテンツ -->
@@ -94,9 +109,47 @@
 
 
   </div>
-
   <h1 class="text-4xl flex justify-center py-12 text-indigo-800 font-bold">スキルセット</h1>
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 pt-8 text-gray-400 mx-8 mb-12">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h1 class="text-3xl font-bold mb-8 text-center text-indigo-800">コーディング</h1>
+      <p class="font-semibold text-gray-600 flex justify-center mb-8">ここは基本問題なくできます</p>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="font-semibold text-gray-600">技術</div>
+        <div class="font-semibold text-gray-600">経験年数</div>
+        <div class="font-semibold text-gray-600">スキル</div>
+
+        <div class="text-gray-600">HTML</div>
+        <div class="text-gray-600">5年</div>
+        <div class="text-gray-400">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+
+        <div class="text-gray-600">CSS</div>
+        <div class="text-gray-600">5年</div>
+        <div class="text-gray-400">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+
+        <div class="text-gray-600">Bootstrap, TailwindCSS</div>
+        <div class="text-gray-600">3年</div>
+        <div class="text-gray-400">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+      </div>
+    </div>
     <div class="bg-white p-6 rounded-lg shadow-lg">
       <h1 class="text-3xl font-bold mb-8 text-center text-indigo-800">フロントエンド</h1>
       <p class="font-semibold text-gray-600 flex justify-center mb-8">フロントエンドの方を中心に携わっていました。Nextにハマっている</p>
@@ -388,45 +441,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-white p-6 rounded-lg shadow-lg">
-      <h1 class="text-3xl font-bold mb-8 text-center text-indigo-800">バッファー</h1>
-      <p class="font-semibold text-gray-600 flex justify-center mb-8">Azureは中上級資格を複数所持しています</p>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="font-semibold text-gray-600">技術</div>
-        <div class="font-semibold text-gray-600">経験年数</div>
-        <div class="font-semibold text-gray-600">スキル</div>
 
-        <div class="text-gray-600">AWS</div>
-        <div class="text-gray-600">2年</div>
-        <div class="text-gray-400">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-
-        <div class="text-gray-600">Azure</div>
-        <div class="text-gray-600">2年</div>
-        <div class="text-gray-400">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-
-        <div class="text-gray-600">Angular</div>
-        <div class="text-gray-600">3年</div>
-        <div class="text-gray-400">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-      </div>
-    </div>
   </div>
 
 
@@ -445,6 +460,29 @@
       </div>
       <p class="text-center mt-4">© 2024 Self introduce site. All rights reserved.</p>
     </div>
+  </footer>
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.fade');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.add('show');
+        } else {
+          slide.classList.remove('show');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 3000); // 3秒ごとにスライドを切り替える
+  </script>
 </body>
 
 </html>
